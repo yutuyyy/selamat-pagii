@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Selamat Pagi Azraaa ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Lato', sans-serif;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  background: #0a0a1a;
+  color: #fff;
+  user-select: none;
+}
+
+/* ===== SCENES ===== */
+.scene {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.9s ease, transform 0.9s ease;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+.scene.active {
+  opacity: 1;
+  pointer-events: all;
+  z-index: 10;
+}
+.scene.exit {
+  opacity: 0;
+  transform: scale(1.04);
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* ===== SCENE 1: NIGHT SKY ===== */
+#scene-night {
+  background: radial-gradient(ellipse at 50% 80%, #1a0a2e 0%, #0a0a1a 60%, #000 100%);
+}
+#stars-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.night-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 2rem;
+}
+.night-subtitle {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(1.1rem, 3vw, 1.6rem);
+  color: #e8c4f0;
+  margin-bottom: 2.5rem;
+  min-height: 2.5em;
+  letter-spacing: 0.03em;
+}
+.cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  background: #e8c4f0;
+  margin-left: 2px;
+  vertical-align: middle;
+  animation: blink 0.8s infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+/* ===== GLASSMORPHISM BUTTON ===== */
+.btn-glow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2.4rem;
+  background: rgba(255,255,255,0.08);
+  border: 1.5px solid rgba(255,180,200,0.45);
+  border-radius: 50px;
+  color: #ffd6e7;
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(1rem, 2.5vw, 1.35rem);
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 0 24px rgba(255,120,160,0.25), 0 4px 24px rgba(0,0,0,0.3);
+  transition: background 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+  animation: float-btn 3s ease-in-out infinite;
+  letter-spacing: 0.04em;
+}
+.btn-glow:hover {
+  background: rgba(255,100,150,0.18);
+  box-shadow: 0 0 42px rgba(255,100,150,0.5), 0 4px 30px rgba(0,0,0,0.3);
+  border-color: rgba(255,160,200,0.7);
+  animation: none;
+}
+@keyframes float-btn {
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-7px)}
+}
+
+/* ===== SCENE 2: SUNRISE ===== */
+#scene-sunrise { overflow: hidden; }
+#sky-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.sunrise-ui {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 55vh;
+}
+.music-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.4rem;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,220,180,0.4);
+  border-radius: 50px;
+  color: #fff5e0;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.85rem;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.3s;
+  letter-spacing: 0.05em;
+}
+.music-btn:hover { background: rgba(255,255,255,0.25); }
+.music-icon { font-size: 1.1rem; animation: pulse-music 1.5s ease-in-out infinite; }
+@keyframes pulse-music { 0%,100%{transform:scale(1)} 50%{transform:scale(1.15)} }
+
+/* ===== SCENE 3: MORNING MESSAGES ===== */
+#scene-messages {
+  background: linear-gradient(160deg, #fff5f0 0%, #ffe4ec 50%, #fff0d6 100%);
+}
+.messages-box {
+  max-width: 520px;
+  width: 90%;
+  text-align: center;
+  padding: 2.5rem 2rem;
+  background: rgba(255,255,255,0.55);
+  border: 1px solid rgba(255,180,180,0.35);
+  border-radius: 28px;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 12px 60px rgba(255,100,120,0.12), 0 2px 20px rgba(0,0,0,0.06);
+}
+.msg-line {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(1.3rem, 4vw, 1.85rem);
+  color: #c2445a;
+  margin: 0.6rem 0;
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.msg-line.visible { opacity: 1; transform: translateY(0); }
+.msg-line:first-child { font-size: clamp(1.6rem, 5vw, 2.3rem); color: #e05575; font-weight: 700; }
+
+/* ===== SCENE 4: HEARTS RAIN ===== */
+#scene-hearts {
+  background: linear-gradient(160deg, #ffe0ea 0%, #ffcdd7 40%, #ffe8cc 100%);
+}
+#hearts-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.love-box {
+  position: relative;
+  z-index: 3;
+  max-width: 520px;
+  width: 90%;
+  text-align: center;
+  padding: 2.5rem 2rem;
+  background: rgba(255,255,255,0.5);
+  border: 1px solid rgba(255,160,180,0.4);
+  border-radius: 28px;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 12px 60px rgba(255,80,120,0.15);
+}
+
+/* ===== SCENE 5: INTERACTIVE HEARTS ===== */
+#scene-interact {
+  background: linear-gradient(160deg, #fff3f0 0%, #ffe8ec 50%, #fff8e6 100%);
+}
+.interact-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(1.2rem, 3.5vw, 1.7rem);
+  color: #c44060;
+  text-align: center;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 5;
+}
+.floating-heart-click {
+  position: absolute;
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  cursor: pointer;
+  animation: float-click 3s ease-in-out infinite;
+  transition: transform 0.2s;
+  z-index: 5;
+  filter: drop-shadow(0 2px 8px rgba(255,80,120,0.4));
+}
+.floating-heart-click:hover { transform: scale(1.3) !important; }
+@keyframes float-click {
+  0%,100%{transform:translateY(0) rotate(-5deg)}
+  50%{transform:translateY(-14px) rotate(5deg)}
+}
+.popup-msg {
+  position: fixed;
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.1rem;
+  color: #fff;
+  background: linear-gradient(135deg,#ff6b8a,#ff9a7b);
+  padding: 0.5rem 1.2rem;
+  border-radius: 50px;
+  box-shadow: 0 4px 20px rgba(255,80,120,0.4);
+  pointer-events: none;
+  z-index: 9999;
+  animation: popup-float 1.8s ease forwards;
+  white-space: nowrap;
+}
+@keyframes popup-float {
+  0%{opacity:0;transform:translateY(0) scale(0.7)}
+  20%{opacity:1;transform:translateY(-10px) scale(1)}
+  80%{opacity:1;transform:translateY(-40px) scale(1)}
+  100%{opacity:0;transform:translateY(-70px) scale(0.9)}
+}
+
+/* ===== SCENE 6: SECRET LETTER ===== */
+#scene-letter {
+  background: linear-gradient(160deg, #fff5e6 0%, #ffe8d6 50%, #fff0e8 100%);
+}
+.envelope-wrap {
+  position: relative;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+}
+.envelope {
+  width: clamp(180px, 42vw, 260px);
+  height: clamp(120px, 30vw, 180px);
+  background: linear-gradient(135deg, #ffb3c1, #ffc8a0);
+  border-radius: 6px;
+  position: relative;
+  box-shadow: 0 8px 40px rgba(255,100,120,0.3);
+  transition: transform 0.4s;
+  overflow: visible;
+}
+.envelope:hover { transform: scale(1.04); }
+.envelope-flap {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 55%;
+  background: linear-gradient(135deg, #ff8fa3, #ffb08a);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top center;
+  transition: transform 0.6s ease;
+  z-index: 1;
+}
+.envelope.open .envelope-flap { transform: rotateX(180deg); }
+.envelope-seal {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.8rem;
+  z-index: 1;
+  transition: opacity 0.3s;
+}
+.envelope.open .envelope-seal { opacity: 0; }
+.letter-paper {
+  position: absolute;
+  bottom: 8px; left: 10px; right: 10px;
+  background: #fffaf6;
+  border-radius: 4px;
+  padding: 0.8rem;
+  z-index: 2;
+  transform: translateY(60%) scale(0.95);
+  opacity: 0;
+  transition: transform 0.6s ease 0.3s, opacity 0.5s ease 0.3s;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.08);
+  text-align: center;
+}
+.envelope.open .letter-paper {
+  transform: translateY(-100%) scale(1);
+  opacity: 1;
+}
+.letter-paper p {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(0.7rem, 2vw, 0.9rem);
+  color: #a0405a;
+  line-height: 1.5;
+}
+
+/* ===== SCENE 7: REASONS ===== */
+#scene-reasons {
+  background: linear-gradient(160deg, #fff0f5 0%, #ffe4ee 50%, #fff5e0 100%);
+}
+.reasons-card {
+  max-width: 420px;
+  width: 90%;
+  text-align: center;
+  padding: 2.5rem 2rem;
+  background: rgba(255,255,255,0.6);
+  border: 1.5px solid rgba(255,150,180,0.35);
+  border-radius: 28px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 12px 50px rgba(255,80,120,0.12);
+}
+.reason-display {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(1.4rem, 5vw, 2.2rem);
+  color: #d43860;
+  margin: 1.2rem 0;
+  min-height: 3rem;
+  transition: all 0.4s ease;
+}
+.reason-counter {
+  font-size: 0.8rem;
+  color: #c08090;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ===== SCENE 8: ENDING ===== */
+#scene-ending {
+  background: linear-gradient(160deg, #fff8e6 0%, #ffe8d0 50%, #fff0e8 100%);
+}
+#ending-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.ending-box {
+  position: relative;
+  z-index: 5;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  padding: 2.5rem 2rem;
+  background: rgba(255,255,255,0.55);
+  border: 1px solid rgba(255,180,140,0.4);
+  border-radius: 28px;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 12px 60px rgba(255,120,80,0.12);
+}
+.success-text {
+  display: none;
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(1.5rem, 5vw, 2.3rem);
+  color: #d44060;
+  animation: pop-in 0.6s cubic-bezier(0.34,1.56,0.64,1) forwards;
+  margin-top: 1rem;
+}
+@keyframes pop-in {
+  0%{transform:scale(0);opacity:0}
+  100%{transform:scale(1);opacity:1}
+}
+
+/* ===== SHARED TEXT STYLES ===== */
+.scene-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(1.4rem, 4.5vw, 2.2rem);
+  color: #c44060;
+  margin-bottom: 0.5rem;
+}
+.scene-subtitle {
+  font-family: 'Lato', sans-serif;
+  font-size: clamp(0.78rem, 2vw, 0.95rem);
+  color: #b06070;
+  letter-spacing: 0.05em;
+  margin-bottom: 1.5rem;
+}
+.love-line {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(1.1rem, 3.5vw, 1.55rem);
+  color: #c44060;
+  margin: 0.5rem 0;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.love-line.visible { opacity: 1; transform: translateY(0); }
+
+/* ===== NAVIGATION DOTS ===== */
+#nav-dots {
+  position: fixed;
+  right: 1.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  z-index: 100;
+}
+.dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  border: 1.5px solid rgba(255,200,200,0.5);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.dot.active {
+  background: #ff7090;
+  box-shadow: 0 0 10px rgba(255,100,130,0.6);
+  transform: scale(1.35);
+}
+
+/* ===== GLOW ORBS ===== */
+.glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.35;
+  pointer-events: none;
+  animation: orb-drift 8s ease-in-out infinite alternate;
+}
+@keyframes orb-drift {
+  0%{transform:translate(0,0)}
+  100%{transform:translate(20px,20px)}
+}
+
+/* ===== MEDIA ===== */
+@media (max-width: 480px) {
+  .btn-glow { padding: 0.85rem 1.8rem; }
+  .messages-box, .love-box, .reasons-card, .ending-box { padding: 1.8rem 1.3rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV DOTS -->
+<div id="nav-dots">
+  <div class="dot active" data-scene="0"></div>
+  <div class="dot" data-scene="1"></div>
+  <div class="dot" data-scene="2"></div>
+  <div class="dot" data-scene="3"></div>
+  <div class="dot" data-scene="4"></div>
+  <div class="dot" data-scene="5"></div>
+  <div class="dot" data-scene="6"></div>
+  <div class="dot" data-scene="7"></div>
+</div>
+
+<!-- ===== SCENE 1: NIGHT ===== -->
+<div class="scene active" id="scene-night">
+  <canvas id="stars-canvas"></canvas>
+  <div class="night-content">
+    <div class="night-subtitle" id="typing-text"><span class="cursor"></span></div>
+    <button class="btn-glow" id="btn-open">💌 Buka Pesan</button>
+  </div>
+</div>
+
+<!-- ===== SCENE 2: SUNRISE ===== -->
+<div class="scene" id="scene-sunrise">
+  <canvas id="sky-canvas"></canvas>
+  <div class="sunrise-ui">
+    <button class="music-btn" id="music-btn">
+      <span class="music-icon">🎵</span>
+      <span id="music-label">Mainkan Musik</span>
+    </button>
+    <button class="btn-glow" id="btn-to-messages" style="animation-delay:0.5s">
+      🌸 Lihat Pesannya
+    </button>
+  </div>
+</div>
+
+<!-- ===== SCENE 3: MESSAGES ===== -->
+<div class="scene" id="scene-messages">
+  <div class="glow-orb" style="width:300px;height:300px;background:#ffb3c8;top:-80px;left:-60px"></div>
+  <div class="glow-orb" style="width:260px;height:260px;background:#ffd6a0;bottom:-60px;right:-50px;animation-delay:3s"></div>
+  <div class="messages-box">
+    <div class="msg-line" id="m1">selamat pagiii, azraaa cantikkk 🌷</div>
+    <div class="msg-line" id="m2">semoga hari ini dapett banyakk kebahagiaannn</div>
+    <div class="msg-line" id="m3">semoga kamuu ketemuu banyakk hal baikkk</div>
+    <div class="msg-line" id="m4">dan semoga senyummu hari ini lebih indahhh daripada kemarinnn</div>
+    <div style="margin-top:1.5rem">
+      <button class="btn-glow" id="btn-to-hearts" style="opacity:0;transition:opacity 0.6s ease;pointer-events:none;color:#c44060;border-color:rgba(200,80,100,0.4)">
+        ❤️ ada pesan lagi
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SCENE 4: HEARTS RAIN ===== -->
+<div class="scene" id="scene-hearts">
+  <canvas id="hearts-canvas"></canvas>
+  <div class="love-box">
+    <div class="love-line" id="l1">aku cuma mauu kamu tahu.....</div>
+    <div class="love-line" id="l2">kaloo ada seseorang yang mengagumimuuu</div>
+    <div class="love-line" id="l3">selaluu bahagiaaa saat kamu tersenyumm</div>
+    <div class="love-line" id="l4">dan selalu bersyukur karena ketemuu samaa kamuu ❤️</div>
+    <div class="love-line" id="l5">dan ituu akuu wahaii azraa bidadarii airr kuuu ❤️</div>
+    <div style="margin-top:1.5rem">
+      <button class="btn-glow" id="btn-to-interact" style="opacity:0;transition:opacity 0.6s ease;pointer-events:none;color:#c44060;border-color:rgba(200,80,100,0.4)">
+        🌸 lanjut yuk
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SCENE 5: INTERACTIVE HEARTS ===== -->
+<div class="scene" id="scene-interact">
+  <p class="interact-title">klik hati-hatinya yaa 🌷</p>
+  <div id="floating-hearts-container"></div>
+  <div style="position:absolute;bottom:3rem;z-index:5;text-align:center">
+    <button class="btn-glow" id="btn-to-letter" style="color:#c44060;border-color:rgba(200,80,100,0.4)">
+      💌 buka bukaaaa
+    </button>
+  </div>
+</div>
+
+<!-- ===== SCENE 6: SECRET LETTER ===== -->
+<div class="scene" id="scene-letter">
+  <div class="glow-orb" style="width:280px;height:280px;background:#ffcc99;top:-50px;right:-40px"></div>
+  <div class="glow-orb" style="width:250px;height:250px;background:#ffaab8;bottom:-40px;left:-40px;animation-delay:4s"></div>
+  <p class="scene-subtitle" style="position:relative;z-index:2;font-family:'Dancing Script',cursive;font-size:1.1rem;color:#c07080">klik amplop untuk membukanya 💌</p>
+  <div class="envelope-wrap" id="envelope-wrap" style="position:relative;z-index:2">
+    <div class="envelope" id="envelope">
+      <div class="envelope-flap"></div>
+      <div class="envelope-seal">💌</div>
+      <div class="letter-paper">
+        <p>akuu harap hari inii kamuu<br>dapett banyakk kebaikannn.</p>
+        <p style="margin-top:0.5rem">karenaa kamu pantess buatt dapetinn<br>semua hall hall indah yang adaaa<br>di duniaa iniii ✨</p>
+      </div>
+    </div>
+  </div>
+  <div style="position:relative;z-index:2;margin-top:6rem">
+    <button class="btn-glow" id="btn-to-reasons" style="color:#c44060;border-color:rgba(200,80,100,0.4)">
+      ❤️ alasan aku menyukaimuu
+    </button>
+  </div>
+</div>
+
+<!-- ===== SCENE 7: REASONS ===== -->
+<div class="scene" id="scene-reasons">
+  <div class="glow-orb" style="width:300px;height:300px;background:#ffb3c8;top:-70px;left:-60px"></div>
+  <div class="reasons-card">
+    <p class="scene-title">alasan aku menyukaimuu ❤️</p>
+    <p class="scene-subtitle">tekan tombol untuk lanjut</p>
+    <div class="reason-display" id="reason-display">...</div>
+    <div class="reason-counter" id="reason-counter">0 / </div>
+    <div style="margin-top:1.5rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <button class="btn-glow" id="btn-next-reason" style="color:#c44060;border-color:rgba(200,80,100,0.4)">
+        ✨ lanjut
+      </button>
+      <button class="btn-glow" id="btn-to-ending" style="color:#c44060;border-color:rgba(200,80,100,0.4);opacity:0;pointer-events:none;transition:opacity 0.5s">
+        ☀️ ke akhir
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SCENE 8: ENDING ===== -->
+<div class="scene" id="scene-ending">
+  <canvas id="ending-canvas"></canvas>
+  <div class="ending-box">
+    <div style="font-size:clamp(2rem,6vw,3rem);margin-bottom:0.5rem">☀️</div>
+    <div class="msg-line visible" style="font-size:clamp(1.3rem,4vw,1.9rem);color:#d04060;margin:0.4rem 0;opacity:1;transform:none">
+      semoga harinyaa azraaa selaluu menyenangkannn ☀️
+    </div>
+    <div class="msg-line visible" style="font-size:clamp(1.1rem,3vw,1.5rem);color:#c06070;margin:0.4rem 0;opacity:1;transform:none">
+      akuu harappp kamuu senyumm habiss bukaa inii ❤️
+    </div>
+    <div style="margin-top:1.8rem">
+      <button class="btn-glow" id="btn-smile" style="color:#c44060;border-color:rgba(200,80,100,0.4)">
+        💖 akuu senyumm kokk yutaa
+      </button>
+    </div>
+    <div class="success-text" id="success-text">YEAAAAAYYY! misi yutaa membuatt azraa senyumm pagii inii berhasill ✨</div>
+  </div>
+</div>
+
+<script>
+// ===== STATE =====
+let currentScene = 0;
+const scenes = [
+  'scene-night','scene-sunrise','scene-messages',
+  'scene-hearts','scene-interact','scene-letter',
+  'scene-reasons','scene-ending'
+];
+
+// ===== SCENE NAVIGATION =====
+function goTo(index) {
+  if (index === currentScene) return;
+  const prev = document.getElementById(scenes[currentScene]);
+  const next = document.getElementById(scenes[index]);
+  prev.classList.add('exit');
+  prev.classList.remove('active');
+  setTimeout(() => prev.classList.remove('exit'), 1000);
+  next.classList.add('active');
+  currentScene = index;
+  updateDots();
+  onSceneEnter(index);
+}
+
+function updateDots() {
+  document.querySelectorAll('.dot').forEach((d,i) => {
+    d.classList.toggle('active', i === currentScene);
+  });
+}
+
+document.querySelectorAll('.dot').forEach(d => {
+  d.addEventListener('click', () => goTo(+d.dataset.scene));
+});
+
+// ===== SCENE ENTER HANDLERS =====
+function onSceneEnter(idx) {
+  if (idx === 1) startSunrise();
+  if (idx === 2) startMessages();
+  if (idx === 3) startHeartsRain();
+  if (idx === 4) spawnFloatingHearts();
+  if (idx === 6) startReasons();
+  if (idx === 7) startEnding();
+}
+
+// ===== SCENE 1: STARS & TYPING =====
+(function initStars() {
+  const canvas = document.getElementById('stars-canvas');
+  const ctx = canvas.getContext('2d');
+  let stars = [];
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    stars = Array.from({length: 220}, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 1.5 + 0.3,
+      speed: Math.random() * 0.012 + 0.005,
+      offset: Math.random() * Math.PI * 2
+    }));
+  }
+  resize();
+  window.addEventListener('resize', resize);
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const t = Date.now() / 1000;
+    stars.forEach(s => {
+      const a = 0.3 + 0.7 * (0.5 + 0.5 * Math.sin(t * s.speed * 12 + s.offset));
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,240,220,${a})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// Typing effect
+(function typing() {
+  const el = document.getElementById('typing-text');
+  const text = 'Sssstt..... yutaa mauu nyapaa kamuu pagii inii nihhh ❤️';
+  let i = 0;
+  function type() {
+    if (i <= text.length) {
+      el.innerHTML = text.slice(0, i) + '<span class="cursor"></span>';
+      i++;
+      setTimeout(type, 52);
+    }
+  }
+  setTimeout(type, 900);
+})();
+
+document.getElementById('btn-open').addEventListener('click', () => goTo(1));
+
+// ===== SCENE 2: SUNRISE CANVAS =====
+let sunriseStarted = false;
+let sunriseProgress = 0;
+
+function startSunrise() {
+  if (sunriseStarted) return;
+  sunriseStarted = true;
+  const canvas = document.getElementById('sky-canvas');
+  const ctx = canvas.getContext('2d');
+
+  let birds = Array.from({length:6}, () => ({
+    x: -80, y: 30 + Math.random() * 60,
+    speed: 0.6 + Math.random() * 0.5,
+    wing: 0, flapSpeed: 0.06 + Math.random() * 0.04,
+    scale: 0.5 + Math.random() * 0.5,
+    delay: Math.floor(Math.random() * 400)
+  }));
+  let clouds = Array.from({length:5}, () => ({
+    x: Math.random() * 900, y: 30 + Math.random() * 120,
+    w: 100 + Math.random() * 130, h: 40 + Math.random() * 30,
+    speed: 0.18 + Math.random() * 0.2, opacity: 0
+  }));
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  let frame = 0;
+  function draw() {
+    const w = canvas.width, h = canvas.height;
+    frame++;
+    sunriseProgress = Math.min(1, frame / 380);
+    const p = sunriseProgress;
+
+    // Sky gradient lerp helper
+    function lerp(a, b, t) { return a.map((v,i) => Math.round(v + (b[i]-v)*t)); }
+    function col(arr) { return `rgb(${arr.join(',')})`; }
+
+    const night0 = [10,8,30], night1 = [20,10,50];
+    const dawn0 = [255,160,100], dawn1 = [255,100,130], dawn2 = [200,80,160];
+    const morn0 = [255,210,120], morn1 = [255,170,100], morn2 = [255,130,100];
+
+    const t1 = Math.min(1, p * 2), t2 = Math.max(0, p * 2 - 1);
+    const sky = ctx.createLinearGradient(0, 0, 0, h);
+    sky.addColorStop(0, col(lerp(lerp(night0,dawn0,t1),morn0,t2)));
+    sky.addColorStop(0.5, col(lerp(lerp(night1,dawn1,t1),morn1,t2)));
+    sky.addColorStop(1, col(lerp(lerp(night1,dawn2,t1),morn2,t2)));
+    ctx.fillStyle = sky;
+    ctx.fillRect(0, 0, w, h);
+
+    // Horizon glow
+    const glow = ctx.createRadialGradient(w/2, h*0.72, 0, w/2, h*0.72, w*0.6);
+    glow.addColorStop(0, `rgba(255,210,100,${p*0.65})`);
+    glow.addColorStop(0.5, `rgba(255,150,80,${p*0.3})`);
+    glow.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = glow;
+    ctx.fillRect(0, 0, w, h);
+
+    // Sun
+    const sunY = h * 0.72 - p * h * 0.38;
+    const sunR = 28 + p * 18;
+    const sunGlow = ctx.createRadialGradient(w/2, sunY, 0, w/2, sunY, sunR*4);
+    sunGlow.addColorStop(0, `rgba(255,240,140,${p})`);
+    sunGlow.addColorStop(0.35, `rgba(255,200,80,${p*0.5})`);
+    sunGlow.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = sunGlow;
+    ctx.fillRect(0, 0, w, h);
+    ctx.beginPath();
+    ctx.arc(w/2, sunY, sunR, 0, Math.PI*2);
+    ctx.fillStyle = `rgba(255,245,180,${p})`;
+    ctx.fill();
+
+    // Clouds
+    clouds.forEach(c => {
+      c.opacity = Math.min(0.7, c.opacity + 0.002);
+      c.x += c.speed;
+      if (c.x > w + 200) c.x = -200;
+      ctx.save();
+      ctx.globalAlpha = c.opacity * p;
+      ctx.fillStyle = 'rgba(255,240,230,0.85)';
+      ctx.beginPath();
+      ctx.ellipse(c.x, c.y, c.w, c.h, 0, 0, Math.PI*2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.ellipse(c.x - c.w*0.3, c.y+5, c.w*0.6, c.h*0.8, 0, 0, Math.PI*2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.ellipse(c.x + c.w*0.35, c.y+8, c.w*0.55, c.h*0.75, 0, 0, Math.PI*2);
+      ctx.fill();
+      ctx.restore();
+    });
+
+    // Birds
+    birds.forEach((b, bi) => {
+      if (frame < b.delay) return;
+      b.x += b.speed;
+      b.wing += b.flapSpeed;
+      if (b.x > w + 100) { b.x = -80; b.y = 30 + Math.random() * 60; }
+      const wy = Math.sin(b.wing) * 5 * b.scale;
+      ctx.save();
+      ctx.globalAlpha = Math.min(1, p * 3);
+      ctx.strokeStyle = 'rgba(80,40,60,0.7)';
+      ctx.lineWidth = 1.5 * b.scale;
+      ctx.beginPath();
+      ctx.moveTo(b.x - 12*b.scale, b.y + wy);
+      ctx.quadraticCurveTo(b.x, b.y - 8*b.scale, b.x + 12*b.scale, b.y + wy);
+      ctx.stroke();
+      ctx.restore();
+    });
+
+    // Ground
+    const ground = ctx.createLinearGradient(0, h*0.85, 0, h);
+    ground.addColorStop(0, `rgba(80,40,20,${p*0.5})`);
+    ground.addColorStop(1, `rgba(40,20,10,${p*0.7})`);
+    ctx.fillStyle = ground;
+    ctx.fillRect(0, h*0.85, w, h*0.15);
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+// ===== MUSIC (Web Audio API) =====
+let audioCtx, musicPlaying = false, gainNode, oscNodes = [], loopTimer;
+document.getElementById('music-btn').addEventListener('click', toggleMusic);
+
+function toggleMusic() {
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    gainNode = audioCtx.createGain();
+    gainNode.gain.value = 0.04;
+    gainNode.connect(audioCtx.destination);
+    const delay = audioCtx.createDelay();
+delay.delayTime.value = 0.25;
+
+const feedback = audioCtx.createGain();
+feedback.gain.value = 0.25;
+
+delay.connect(feedback);
+feedback.connect(delay);
+
+gainNode.connect(delay);
+delay.connect(audioCtx.destination);
+    playMelody();
+    musicPlaying = true;
+  } else if (musicPlaying) {
+    oscNodes.forEach(o => { try{o.stop(0)}catch(e){} });
+    oscNodes = [];
+    clearTimeout(loopTimer);
+    musicPlaying = false;
+  } else {
+    playMelody();
+    musicPlaying = true;
+  }
+  document.getElementById('music-label').textContent = musicPlaying ? 'Pause Musik' : 'Mainkan Musik';
+}
+
+function playMelody() {
+
+  const melody = [
+    523.25, 659.25, 783.99,
+    659.25, 587.33,
+
+    493.88, 659.25, 783.99,
+    659.25, 587.33,
+
+    440.00, 587.33, 698.46,
+    587.33, 523.25,
+
+    392.00, 523.25, 659.25,
+    523.25, 493.88
+  ];
+
+  let start = audioCtx.currentTime + 0.1;
+
+  melody.forEach((freq, i) => {
+
+    const osc1 = audioCtx.createOscillator();
+    const osc2 = audioCtx.createOscillator();
+
+    const gain = audioCtx.createGain();
+
+    osc1.type = "sine";
+    osc2.type = "triangle";
+
+    osc1.frequency.value = freq;
+    osc2.frequency.value = freq * 2;
+
+    osc2.detune.value = -8;
+
+    gain.gain.setValueAtTime(0, start + i * 0.45);
+    gain.gain.linearRampToValueAtTime(
+      0.08,
+      start + i * 0.45 + 0.05
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+      0.001,
+      start + i * 0.45 + 1.6
+    );
+
+    osc1.connect(gain);
+    osc2.connect(gain);
+
+    gain.connect(gainNode);
+
+    osc1.start(start + i * 0.45);
+    osc2.start(start + i * 0.45);
+
+    osc1.stop(start + i * 0.45 + 1.6);
+    osc2.stop(start + i * 0.45 + 1.6);
+
+    oscNodes.push(osc1);
+    oscNodes.push(osc2);
+  });
+
+  loopTimer = setTimeout(() => {
+    if (musicPlaying) playMelody();
+  }, melody.length * 450);
+}
+document.getElementById('btn-to-messages').addEventListener('click', () => goTo(2));
+
+// ===== SCENE 3: MESSAGES =====
+let messagesStarted = false;
+function startMessages() {
+  if (messagesStarted) return;
+  messagesStarted = true;
+  const lines = ['m1','m2','m3','m4'];
+  lines.forEach((id, i) => {
+    setTimeout(() => {
+      document.getElementById(id).classList.add('visible');
+      if (i === lines.length - 1) {
+        setTimeout(() => {
+          const btn = document.getElementById('btn-to-hearts');
+          btn.style.opacity = '1';
+          btn.style.pointerEvents = 'all';
+        }, 700);
+      }
+    }, 600 + i * 850);
+  });
+}
+document.getElementById('btn-to-hearts').addEventListener('click', () => goTo(3));
+
+// ===== SCENE 4: HEARTS RAIN =====
+let heartsStarted = false;
+function startHeartsRain() {
+  if (heartsStarted) return;
+  heartsStarted = true;
+  const canvas = document.getElementById('hearts-canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+
+  const palette = ['#ff7090','#ff90a0','#ffaabc','#ffb3c8','#ff85a1'];
+  const particles = Array.from({length: 90}, () => ({
+    x: Math.random() * canvas.width,
+    y: -30 - Math.random() * canvas.height,
+    size: 10 + Math.random() * 22,
+    speed: 1 + Math.random() * 2.5,
+    drift: (Math.random() - 0.5) * 0.8,
+    rot: Math.random() * Math.PI * 2,
+    rotSpeed: (Math.random()-0.5)*0.04,
+    alpha: 0.5 + Math.random() * 0.5,
+    color: palette[Math.floor(Math.random()*palette.length)]
+  }));
+
+  function drawHeart(ctx, x, y, size, rot, color, alpha) {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(rot);
+    ctx.globalAlpha = alpha;
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.moveTo(0, -size*0.3);
+    ctx.bezierCurveTo(size*0.5,-size,size,-size*0.3,0,size*0.5);
+    ctx.bezierCurveTo(-size,-size*0.3,-size*0.5,-size,0,-size*0.3);
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function animateHearts() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+      p.y += p.speed;
+      p.x += p.drift;
+      p.rot += p.rotSpeed;
+      if (p.y > canvas.height + 30) {
+        p.y = -30;
+        p.x = Math.random() * canvas.width;
+      }
+      drawHeart(ctx, p.x, p.y, p.size, p.rot, p.color, p.alpha);
+    });
+    requestAnimationFrame(animateHearts);
+  }
+  animateHearts();
+
+  const lines = ['l1','l2','l3','l4','l5'];
+  lines.forEach((id, i) => {
+    setTimeout(() => {
+      document.getElementById(id).classList.add('visible');
+      if (i === lines.length - 1) {
+        setTimeout(() => {
+          const btn = document.getElementById('btn-to-interact');
+          btn.style.opacity = '1';
+          btn.style.pointerEvents = 'all';
+        }, 700);
+      }
+    }, 600 + i * 900);
+  });
+}
+document.getElementById('btn-to-interact').addEventListener('click', () => goTo(4));
+
+// ===== SCENE 5: FLOATING HEARTS CLICK =====
+const popMessages = [
+  'kamu lucuuu ❤️','jangan lupa sarapan yaaa 🌷',
+  'semangat menjalani harii 💫','senyummuu maniss banget 🌸',
+  'kamu istimewaa 🌟','makasih udah adaa 🤍',
+  'harimu pasti indahh ☀️','kamu kereeen bangett 💕'
+];
+const heartEmojis = ['❤️','🧡','💛','💚','💙','💜','🩷','🤍','💖','💗'];
+
+function spawnFloatingHearts() {
+  const container = document.getElementById('floating-hearts-container');
+  container.innerHTML = '';
+  for (let i = 0; i < 18; i++) {
+    const h = document.createElement('div');
+    h.className = 'floating-heart-click';
+    h.textContent = heartEmojis[i % heartEmojis.length];
+    h.style.left = (5 + Math.random() * 85) + '%';
+    h.style.top = (10 + Math.random() * 65) + '%';
+    h.style.animationDelay = (Math.random() * 3) + 's';
+    h.style.animationDuration = (2.5 + Math.random() * 2) + 's';
+    h.addEventListener('click', (e) => {
+      showPopup(e.clientX, e.clientY);
+    });
+    container.appendChild(h);
+  }
+}
+
+function showPopup(x, y) {
+  const msg = popMessages[Math.floor(Math.random() * popMessages.length)];
+  const el = document.createElement('div');
+  el.className = 'popup-msg';
+  el.textContent = msg;
+  el.style.left = Math.max(10, Math.min(window.innerWidth - 200, x - 80)) + 'px';
+  el.style.top = (y - 20) + 'px';
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 1900);
+}
+
+document.getElementById('btn-to-letter').addEventListener('click', () => goTo(5));
+
+// ===== SCENE 6: ENVELOPE =====
+document.getElementById('envelope-wrap').addEventListener('click', () => {
+  document.getElementById('envelope').classList.toggle('open');
+});
+document.getElementById('btn-to-reasons').addEventListener('click', () => goTo(6));
+
+// ===== SCENE 7: REASONS =====
+const reasons = [
+  'senyummuu 🌷',
+  'karnaa ituu kamuu 🌷',
+  'ndaaa tauuu ☀️',
+  'semuanyaa ❤️',
+  'tetepp semuanyaaa ✨'
+];
+let reasonIdx = 0;
+
+function startReasons() {
+  reasonIdx = 0;
+  const el = document.getElementById('reason-display');
+  el.style.opacity = '1';
+  el.style.transform = 'scale(1)';
+  el.textContent = '...';
+  document.getElementById('reason-counter').textContent = '0 / ' + reasons.length;
+  const endBtn = document.getElementById('btn-to-ending');
+  endBtn.style.opacity = '0';
+  endBtn.style.pointerEvents = 'none';
+}
+
+document.getElementById('btn-next-reason').addEventListener('click', () => {
+  if (reasonIdx >= reasons.length) return;
+
+  const text = reasons[reasonIdx];
+  const el = document.getElementById('reason-display');
+
+  el.style.opacity = '0';
+  el.style.transform = 'scale(0.9)';
+
+  setTimeout(() => {
+    el.textContent = text;
+    el.style.opacity = '1';
+    el.style.transform = 'scale(1)';
+  }, 200);
+
+  reasonIdx++;
+
+  document.getElementById('reason-counter').textContent =
+    `${reasonIdx} / ${reasons.length}`;
+
+  if (reasonIdx === reasons.length) {
+    setTimeout(() => {
+      const btn = document.getElementById('btn-to-ending');
+      btn.style.opacity = '1';
+      btn.style.pointerEvents = 'all';
+    }, 700);
+  }
+});
+document.getElementById('btn-to-ending').addEventListener('click', () => goTo(7));
+
+// ===== SCENE 8: ENDING =====
+function startEnding() { /* scene already rendered */ }
+
+document.getElementById('btn-smile').addEventListener('click', () => {
+  document.getElementById('btn-smile').style.display = 'none';
+  const success = document.getElementById('success-text');
+  success.style.display = 'block';
+  launchConfetti();
+});
+
+function launchConfetti() {
+  const canvas = document.getElementById('ending-canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+
+  const colors = ['#ff7090','#ffb3c8','#ffd700','#ff9a7b','#c77dff','#ff6b6b','#ffc8e8','#a0e4ff'];
+  const pieces = Array.from({length: 180}, () => ({
+    x: Math.random() * canvas.width,
+    y: -20 - Math.random() * 200,
+    size: 8 + Math.random() * 14,
+    color: colors[Math.floor(Math.random() * colors.length)],
+    speed: 2 + Math.random() * 4,
+    drift: (Math.random()-0.5)*2.5,
+    rot: Math.random() * Math.PI * 2,
+    rotSpeed: (Math.random()-0.5)*0.12,
+    type: Math.random() > 0.4 ? 'heart' : 'circle'
+  }));
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let anyAlive = false;
+    pieces.forEach(p => {
+      if (p.y > canvas.height + 30) return;
+      anyAlive = true;
+      p.y += p.speed;
+      p.x += p.drift;
+      p.rot += p.rotSpeed;
+      const alpha = Math.max(0, 1 - (p.y / (canvas.height * 1.1)));
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot);
+      if (p.type === 'heart') {
+        const s = p.size * 0.6;
+        ctx.fillStyle = p.color;
+        ctx.beginPath();
+        ctx.moveTo(0, -s*0.3);
+        ctx.bezierCurveTo(s*0.5,-s,s,-s*0.3,0,s*0.5);
+        ctx.bezierCurveTo(-s,-s*0.3,-s*0.5,-s,0,-s*0.3);
+        ctx.fill();
+      } else {
+        ctx.beginPath();
+        ctx.arc(0, 0, p.size*0.45, 0, Math.PI*2);
+        ctx.fillStyle = p.color;
+        ctx.fill();
+      }
+      ctx.restore();
+    });
+    if (anyAlive) requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+// ===== INIT =====
+document.getElementById('scene-night').classList.add('active');
+updateDots();
+</script>
+</body>
+</html>
